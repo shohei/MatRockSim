@@ -1,4 +1,4 @@
-edit % ===== RocketSim =====
+% ===== RocketSim =====
 % 6自由度の運動を行う飛翔体の飛翔シミュレータ
 % Matlab2014RとOctave3.6.4で動作を確認。
 % 
@@ -33,6 +33,7 @@ AbsTol = [1e-4; % m
 options = odeset('Events', @events_land, 'RelTol', 1e-3, 'AbsTol', AbsTol);
 
 time_end = 400;
+
 if time_parachute > time_end
   time_parachute = time_end - 0.1;
 end
@@ -60,48 +61,54 @@ end
 % --------------
 %     plot
 % --------------
-figure()
-plot(T,X(:,1))
-title('Weight')
-xlabel('Time [s]')
-ylabel('Weight [kg]')
-grid on
+% figure()
+% plot(T,X(:,1))
+% title('Weight')
+% xlabel('Time [s]')
+% ylabel('Weight [kg]')
+% grid on
+% 
+% figure()
+% plot(T,X(:,2),'-',T,X(:,3),'-',T,X(:,4),'-')
+% title('Position')
+% xlabel('Time [s]')
+% ylabel('Position [m]')
+% legend('Altitude','East','North')
+% grid on
+% 
+% figure()
+% plot(T,X(:,5),'-',T,X(:,6),'-',T,X(:,7),'-')
+% title('Velocity')
+% xlabel('Time [s]')
+% ylabel('Velocity [m/s]')
+% legend('Altitude','East','North')
+% grid on
+% 
+% figure()
+% plot(T,X(:,8),'-',T,X(:,9),'-',T,X(:,10),'-',T,X(:,11),'-')
+% title('Attitude')
+% xlabel('Time [s]')
+% ylabel('Quaternion [-]')
+% legend('q0','q1','q2','q3')
+% grid on
+% 
+% figure()
+% plot(T,X(:,12),'-',T,X(:,13),'-',T,X(:,14),'-')
+% title('Angler Velocity')
+% xlabel('Time [s]')
+% ylabel('Angler Velocity [rad/s]')
+% legend('omega x','omega y','omega z')
+% grid on
 
-figure()
-plot(T,X(:,2),'-',T,X(:,3),'-',T,X(:,4),'-')
-title('Position')
-xlabel('Time [s]')
-ylabel('Position [m]')
-legend('Altitude','East','North')
-grid on
 
-figure()
-plot(T,X(:,5),'-',T,X(:,6),'-',T,X(:,7),'-')
-title('Velocity')
-xlabel('Time [s]')
-ylabel('Velocity [m/s]')
-legend('Altitude','East','North')
-grid on
-
-figure()
-plot(T,X(:,8),'-',T,X(:,9),'-',T,X(:,10),'-',T,X(:,11),'-')
-title('Attitude')
-xlabel('Time [s]')
-ylabel('Quaternion [-]')
-legend('q0','q1','q2','q3')
-grid on
-
-figure()
-plot(T,X(:,12),'-',T,X(:,13),'-',T,X(:,14),'-')
-title('Angler Velocity')
-xlabel('Time [s]')
-ylabel('Angler Velocity [rad/s]')
-legend('omega x','omega y','omega z')
-grid on
 
 % coordinate: Up-East-North
 figure()
-plot3(X(:,3),X(:,4),X(:,2),0,0,0,'x');
+xe = X(:,3);
+ye = X(:,4);
+ze = X(:,2);
+hh = plot3(X(:,3),X(:,4),X(:,2),0,0,0,'x');
+
 grid on
 xlabel('East');
 ylabel('North');
@@ -124,6 +131,21 @@ if plot3_height < plot3_width_max
     zlim([0 plot3_width_max]);
 else
     zlim([0 plot3_height*1.1]);
+end
+big;
+children = get(gca, 'children');
+delete(children(1));
+delete(hh);
+hold on;
+plot3(0,0,0,'x');
+
+for i=1:length(xe)
+  x = xe(i);
+  y = ye(i);
+  z = ze(i);
+  plot3(x,y,z,'ro');
+  drawnow;
+  pause(0.1);
 end
 
 

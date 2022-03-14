@@ -47,4 +47,4 @@ title('gravity');
 xlabel('gravity accelaration [m/s2]')
 ylabel('altitude [km]')
 
-
+big;
