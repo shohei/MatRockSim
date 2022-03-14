@@ -6,6 +6,7 @@ global IXX IYY IZZ
 global IXXdot IYYdot IZZdot
 global VWH
 global para_Cd para_S
+global thrust_data thrust_t
 
 % ---- パラメータ設定 ----
 % m0: 初期質量[kg]
@@ -23,20 +24,23 @@ global para_Cd para_S
 % IXXdot,IYYdot,IZZdot: 慣性モーメントの時間変化[kgm2/sec]
 % azimth, elevation: 初期姿勢の方位角、仰角[deg]
 % VWH:　水平座標系においての風速(Up-East-North) [m/s] (3x1)
-m0 = 4.0;
-Isp = 200;
+% m0 = 4.0;
+m0 = 2.0;
+Isp = 110;
 g0 = 9.80665;
 FT = 150;
-Tend = 4;
-At = 0.01;
-area = 0.010;
+% Tend = 4;
+At = 0.012;
+D = 60e-3; %m
+% area = 0.010;
+area = pi/4*D^2;
 CLa = 3.5;
 length_GCM = [-0.70; 0; 0]; length_A = [-0.50; 0; 0];
 IXX = 5; IYY = 5; IZZ = 1;
 IXXdot = 0; IYYdot = 0; IZZdot = 0;
-azimth = 45; elevation = 90; %なにもしない設定（真上に打ち上げ）
+% azimth = 45; elevation = 90; %なにもしない設定（真上に打ち上げ）
 % azimth = 90; elevation = 80; %真東に打ち上げ
-% azimth = -90; elevation = 80; %真西に打ち上げ
+azimth = -90; elevation = 80; %真西に打ち上げ
 %azimth = -90; elevation = 70; %真西に打ち上げ。より水平に近い角度で射出。
 
 % VWH = [0; 0; 0];
@@ -87,5 +91,21 @@ time_ref=123456.78;
 day_ref = [2022, 4,1];
 [xr, yr, zr] = blh2ecef(launch_phi, launch_lambda, launch_h);
 
-
-
+% Load thrust .eng file
+fid = fopen('March_03.eng');
+tline = fgetl(fid);
+thrust_t = [];
+thrust_data = [];
+while ischar(tline)
+    if tline(1)~=';'
+      val = split(tline);
+      if length(val)==2
+        t = str2double(cell2mat(val(1)));
+        F = str2double(cell2mat(val(2)));
+        thrust_t(end+1) = t;
+        thrust_data(end+1) = F;
+      end
+    end
+    tline = fgetl(fid);
+end
+Tend = thrust_t(end);

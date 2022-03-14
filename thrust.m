@@ -1,9 +1,9 @@
 % ----
-% „—Í—š—ğ
-% @param t: Œ»İ[sec] (1x1)
-% @param Tend: ”RÄI—¹[sec] (1x1)
-% @param FT: „—Í[N] (1x1)
-% @return ft: „—Í[N] (1x1)
+% Ââ€â€”Ãâ€”Å¡â€”Ã°
+% @param t: Å’Â»ÂÃÅ½Å¾ÂÂ[sec] (1x1)
+% @param Tend: â€RÂÃ„ÂIâ€”Â¹Å½Å¾ÂÂ[sec] (1x1)
+% @param FT: Ââ€â€”Ã[N] (1x1)
+% @return ft: Ââ€â€”Ã[N] (1x1)
 % ----
 function ft = thrust(t, Tends, FT)
 	ft = 0.0;

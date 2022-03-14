@@ -151,7 +151,7 @@ for i=1:length(xe)
   z = ze(i);
   plot3(x,y,z,'ro');
   drawnow;
-  pause(0.1);
+  pause(0.01);
 end
 
 plot3(X(:,3),X(:,4),X(:,2),0,0,0,'x');

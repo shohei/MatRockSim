@@ -32,6 +32,7 @@ global length_GCM length_A
 global IXX IYY IZZ
 global IXXdot IYYdot IZZdot
 global VWH
+global thrust_data thrust_t
 
 % ---- 推力 ----
 % ジンバル角度 delta_Y, delta_P[rad]
@@ -45,7 +46,9 @@ deltaP = 0;
 
 % 定格推力 FT[N] その時刻における推力 Ft[N]
 % 推進剤の質量流量 delta_m[kg/s]
-Ft = thrust(t, [Tend], [FT]); 
+% Ft = thrust(t, [Tend], [FT]);
+Ft = thrust_eng(t, thrust_data, thrust_t);
+
 delta_m = -Ft / Isp / g0;
 
 % ジンバル角を考慮した機体座標系における推力 FTB[N]
