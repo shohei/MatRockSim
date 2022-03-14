@@ -1,4 +1,4 @@
-% ===== RocketSim =====
+edit % ===== RocketSim =====
 % 6自由度の運動を行う飛翔体の飛翔シミュレータ
 % Matlab2014RとOctave3.6.4で動作を確認。
 % 
@@ -41,6 +41,7 @@ disp('Start Simulation...');
 
 % パラシュートの有無でシミュレーションの場合分け
 if para_exist == true
+  disp('with parachute');  
   tic
   [T_rocket, X_rocket] = ode23s(@rocket_dynamics, [0 time_parachute], x0, options);
   toc;tic
@@ -50,6 +51,7 @@ if para_exist == true
   X = [X_rocket; X_parachute];
 else
   % パラボリックフライト
+  disp('no parachute');  
   tic
   [T, X] = ode23s(@rocket_dynamics, [0 time_end], x0, options);
   toc
