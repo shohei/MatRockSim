@@ -165,8 +165,7 @@ if exist('output', 'dir') == 0
 end
 
 tic
-disp('making KML and HTML files...');
-pos2GPSdata(filename, T, X(:,2), X(:,3), X(:,4), xr, yr, zr, time_ref, day_ref )
+disp('making KML files...');
+% pos2GPSdata(filename, T, X(:,2), X(:,3), X(:,4), xr, yr, zr, time_ref, day_ref );
 str_KML = pos2KML(filename, X(:,2), X(:,3), X(:,4),xr, yr, zr);
-KML2html(filename, str_KML,launch_phi, launch_lambda, launch_h);
 toc
