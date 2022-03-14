@@ -25,7 +25,9 @@ global para_Cd para_S
 
 % 空気密度、重力加速度
 [~, a, P, rho] = atmosphere_Rocket(x(2));
-[gc, gnorth] = gravity(x(2), 35*pi/180);
+nairobi_lat = -1.090786;
+% [gc, gnorth] = gravity(x(2), 35*pi/180);
+[gc, gnorth] = gravity(x(2), nairobi_lat*pi/180);
 
 % 速度の運動方程式
 if x(5) > 0
