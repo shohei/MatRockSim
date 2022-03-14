@@ -1,3 +1,9 @@
+# Todo
+- パラシュートのシミュレーションの改善（風が全く関係ない）
+-  パラシュートのシミュレーション時間刻みが大きい？
+-  推力をEngファイルから読み込めるようにする
+
+
 # MatRockSim
 
 Matlab Rocket Flight Simulator
