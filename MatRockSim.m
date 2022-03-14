@@ -50,6 +50,10 @@ if para_exist == true
   toc
   T = [T_rocket; T_parachute];
   X = [X_rocket; X_parachute];
+  fprintf('Apogee altitude: %.0f [m]\n',X_rocket(end,2));
+  fprintf('Apogee time t = %.0f [s]\n',T_rocket(end));
+  fprintf('Ground hit speed: %.2f [m/s]\n',X(end,5));
+  fprintf('Landing time t = %.0f [s]\n',T_parachute(end));
 else
   % パラボリックフライト
   disp('no parachute');  
@@ -102,6 +106,7 @@ end
 
 
 
+
 % coordinate: Up-East-North
 figure()
 xe = X(:,3);
@@ -147,7 +152,6 @@ for i=1:length(xe)
   drawnow;
   pause(0.1);
 end
-
 
 % ----
 % mapping

@@ -34,8 +34,9 @@ CLa = 3.5;
 length_GCM = [-0.70; 0; 0]; length_A = [-0.50; 0; 0];
 IXX = 5; IYY = 5; IZZ = 1;
 IXXdot = 0; IYYdot = 0; IZZdot = 0;
-azimth = 45; elevation = 80;
-VWH = [0; 0; 0];
+azimth = 45; elevation = 90;
+% VWH = [0; 0; 0];
+VWH = [0; 4; 0];
 
 % ---- パラシュート ----
 % para_exist : パラシュートがあるかどうか[true,false]
@@ -43,9 +44,11 @@ VWH = [0; 0; 0];
 % para_Dia: パラシュート開傘時の直径[m]
 % para_S: パラシュート面積[m2]
 para_exist = true;
-para_Cd = 1.0;
-para_Dia = 1.5;
-time_parachute = 15;
+% para_Cd = 1.0;
+para_Cd = 0.8;
+% para_Dia = 1.5;
+para_Dia = 2.0;
+time_parachute = 10;
 para_S = para_Dia * para_Dia / 4 * pi;
 
 % ---- 常微分方程式に使う状態量の初期化 ----
@@ -73,11 +76,11 @@ filename = 'jkuat';
 % launch_phi = 34.731059; % 43.5807
 % launch_lambda = 139.415917; % 142.002083
 % launch_h = 465; % 50
-launch_phi = -1.091108;
-launch_lambda = 37.011861; % 142.002083
+launch_phi = -1.090786; %JKUAT rugby field;
+launch_lambda = 37.014623;
 launch_h = 1527; 
 time_ref=123456.78;
-day_ref = [2020, 10,1];
+day_ref = [2022, 4,1];
 [xr, yr, zr] = blh2ecef(launch_phi, launch_lambda, launch_h);
 
 
