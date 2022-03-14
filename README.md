@@ -3,6 +3,9 @@
 -  パラシュートのシミュレーション時間刻みが大きい？
 -  推力をEngファイルから読み込めるようにする
 
+# シミュレーション
+![](result/compareison_elevation.jpg)
+
 
 # MatRockSim
 
