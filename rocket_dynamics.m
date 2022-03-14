@@ -54,7 +54,7 @@ FTB = Ft * [cos(deltaY)*cos(deltaP); -sin(deltaY); -cos(deltaY)*sin(deltaP)];
 % ---- 空気力 ----
 % 水平座標系における風ベクトルVWH[m/s]（高度方向の分布は無いものとする）
 % 水平座標系における機体の対気速度ベクトルVA[m/s]
-VWH = [0; 0; 0];
+% VWH = [0; 0; 0];
 VA = [x(5); x(6); x(7)] - VWH; % 対気速度
 
 % 機体座標系から水平座標系への座標変換を表すクォータニオン quat (quat_B2H)

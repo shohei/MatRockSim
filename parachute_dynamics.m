@@ -31,8 +31,10 @@ nairobi_lat = -1.090786;
 
 % 速度の運動方程式
 if x(5) > 0
-	delta_V = gc - 0.5 / x(1) * rho * para_Cd * para_S * x(5) * x(5);
+	% ロケット上昇中(XH>0)
+    delta_V = gc - 0.5 / x(1) * rho * para_Cd * para_S * x(5) * x(5);
 else
+    % ロケット下降中(XH<0)
 	delta_V = gc + 0.5 / x(1) * rho * para_Cd * para_S * x(5) * x(5);
 end
 

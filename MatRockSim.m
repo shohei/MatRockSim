@@ -54,6 +54,7 @@ if para_exist == true
   fprintf('Apogee time t = %.0f [s]\n',T_rocket(end));
   fprintf('Ground hit speed: %.2f [m/s]\n',X(end,5));
   fprintf('Landing time t = %.0f [s]\n',T_parachute(end));
+  fprintf('Horizontal landing distance [m] = %.0f [m]\n',X_parachute(end,3));
 else
   % パラボリックフライト
   disp('no parachute');  
@@ -152,6 +153,8 @@ for i=1:length(xe)
   drawnow;
   pause(0.1);
 end
+
+plot3(X(:,3),X(:,4),X(:,2),0,0,0,'x');
 
 % ----
 % mapping

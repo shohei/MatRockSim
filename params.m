@@ -34,7 +34,11 @@ CLa = 3.5;
 length_GCM = [-0.70; 0; 0]; length_A = [-0.50; 0; 0];
 IXX = 5; IYY = 5; IZZ = 1;
 IXXdot = 0; IYYdot = 0; IZZdot = 0;
-azimth = 45; elevation = 90;
+azimth = 45; elevation = 90; %なにもしない設定（真上に打ち上げ）
+% azimth = 90; elevation = 80; %真東に打ち上げ
+% azimth = -90; elevation = 80; %真西に打ち上げ
+%azimth = -90; elevation = 70; %真西に打ち上げ。より水平に近い角度で射出。
+
 % VWH = [0; 0; 0];
 VWH = [0; 4; 0];
 
