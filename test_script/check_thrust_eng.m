@@ -1,6 +1,7 @@
 clear; close all; 
+addpath '..'/eng_files/;
 
-fid = fopen('March_03.eng');
+fid = fopen('N-2.eng');
 tline = fgetl(fid);
 ts = [];
 Fs = [];
@@ -17,7 +18,7 @@ while ischar(tline)
     tline = fgetl(fid);
 end
 
-tt = linspace(0,3,20);
+tt = linspace(0,3,30);
 FF = interp1(ts,Fs,tt);
 plot(ts,Fs,'-',tt,FF,':.');
 

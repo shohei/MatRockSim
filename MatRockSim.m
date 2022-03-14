@@ -18,6 +18,7 @@ addpath ./quaternion
 addpath ./environment
 addpath ./aerodynamics
 addpath ./mapping
+addpath ./eng_files
 
 % ---- パラメータ設定読み込み ----
 % params_test
@@ -34,27 +35,32 @@ options = odeset('Events', @events_land, 'RelTol', 1e-3, 'AbsTol', AbsTol);
 
 time_end = 400;
 
-if time_parachute > time_end
-  time_parachute = time_end - 0.1;
-end
-
 disp('Start Simulation...');
 
 % パラシュートの有無でシミュレーションの場合分け
 if para_exist == true
   disp('with parachute');  
   tic
-  [T_rocket, X_rocket] = ode23s(@rocket_dynamics, [0 time_parachute], x0, options);
+  [T_rocket, X_rocket] = ode23s(@rocket_dynamics, [0 time_parachute_tmp], x0, options);
   toc;tic
-  [T_parachute, X_parachute] = ode23s(@parachute_dynamics, [time_parachute time_end], X_rocket(length(X_rocket),:), options);
+  x_vertical = movmean(X_rocket(:,2),5);
+  v_vertical = diff(x_vertical);
+  v_vertical_filtered_index = find(v_vertical<0);
+  apogee_index = v_vertical_filtered_index(1);
+  t_apogee = T_rocket(apogee_index);
+  tic
+  [T_rocket, X_rocket] = ode23s(@rocket_dynamics, [0 t_apogee], x0, options);
+  toc;tic
+  [T_parachute, X_parachute] = ode23s(@parachute_dynamics, [t_apogee time_end], X_rocket(length(X_rocket),:), options);
   toc
   T = [T_rocket; T_parachute];
   X = [X_rocket; X_parachute];
+  fprintf('Burn time: %.0f [s]\n',Tend);
   fprintf('Apogee altitude: %.0f [m]\n',X_rocket(end,2));
-  fprintf('Apogee time t = %.0f [s]\n',T_rocket(end));
+  fprintf('Apogee time t = %.0f [s]\n', t_apogee);
   fprintf('Ground hit speed: %.2f [m/s]\n',X(end,5));
   fprintf('Landing time t = %.0f [s]\n',T_parachute(end));
-  fprintf('Horizontal landing distance [m] = %.0f [m]\n',X_parachute(end,3));
+  fprintf('Horizontal landing distance: %.0f [m]\n',X_parachute(end,3));
 else
   % パラボリックフライト
   disp('no parachute');  

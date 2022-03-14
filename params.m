@@ -24,8 +24,7 @@ global thrust_data thrust_t
 % IXXdot,IYYdot,IZZdot: 慣性モーメントの時間変化[kgm2/sec]
 % azimth, elevation: 初期姿勢の方位角、仰角[deg]
 % VWH:　水平座標系においての風速(Up-East-North) [m/s] (3x1)
-% m0 = 4.0;
-m0 = 2.0;
+m0 = 4.0;
 Isp = 110;
 g0 = 9.80665;
 FT = 150;
@@ -56,7 +55,7 @@ para_exist = true;
 para_Cd = 0.8;
 % para_Dia = 1.5;
 para_Dia = 2.0;
-time_parachute = 10;
+time_parachute_tmp = 40;
 para_S = para_Dia * para_Dia / 4 * pi;
 
 % ---- 常微分方程式に使う状態量の初期化 ----
@@ -92,7 +91,7 @@ day_ref = [2022, 4,1];
 [xr, yr, zr] = blh2ecef(launch_phi, launch_lambda, launch_h);
 
 % Load thrust .eng file
-fid = fopen('March_03.eng');
+fid = fopen('N-2.eng');
 tline = fgetl(fid);
 thrust_t = [];
 thrust_data = [];
