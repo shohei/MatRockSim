@@ -86,7 +86,7 @@ end
 % ylabel('Position [m]')
 % legend('Altitude','East','North')
 % grid on
-% 
+
 % figure()
 % plot(T,X(:,5),'-',T,X(:,6),'-',T,X(:,7),'-')
 % title('Velocity')
@@ -94,7 +94,7 @@ end
 % ylabel('Velocity [m/s]')
 % legend('Altitude','East','North')
 % grid on
-% 
+
 % figure()
 % plot(T,X(:,8),'-',T,X(:,9),'-',T,X(:,10),'-',T,X(:,11),'-')
 % title('Attitude')
@@ -102,16 +102,14 @@ end
 % ylabel('Quaternion [-]')
 % legend('q0','q1','q2','q3')
 % grid on
-% 
-% figure()
-% plot(T,X(:,12),'-',T,X(:,13),'-',T,X(:,14),'-')
-% title('Angler Velocity')
-% xlabel('Time [s]')
-% ylabel('Angler Velocity [rad/s]')
-% legend('omega x','omega y','omega z')
-% grid on
 
-
+figure()
+plot(T,X(:,12),'-',T,X(:,13),'-',T,X(:,14),'-')
+title('Angler Velocity')
+xlabel('Time [s]')
+ylabel('Angler Velocity [rad/s]')
+legend('omega x','omega y','omega z')
+grid on
 
 
 % coordinate: Up-East-North
